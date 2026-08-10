@@ -1,0 +1,16 @@
+stage,unit,removed,remaining,reason
+00_raw,queries,0,21689,baseline
+00_raw,passages,0,27590,baseline
+01_structural,queries,0,21689,"null/empty text, orphaned pos_id, or duplicate query_id"
+01_structural,"(query, negative) pairs",16245,216439,"negative equal to the positive, orphaned, or duplicated within the query"
+01_structural,queries,0,21689,no surviving negatives
+02_dedup_pass,passages,19,27571,normalized-text duplicates merged
+02_dedup_pass,"(query, negative) pairs",41,216398,negative collapsed onto the positive or another negative after remap
+02_dedup_pass,queries,0,21689,no surviving negatives
+03_dedup_query,queries,386,21303,duplicate query text consolidated (alternative positives retained)
+03_dedup_query,queries,0,21303,no surviving negatives
+04_degenerate,queries,164,21139,every acceptable positive below 6 tokens
+05_anaphoric,queries,227,20912,context-dependent query (entity source: scispacy:en_core_sci_sm)
+06_false_negative,"(query, negative) pairs",90960,119549,stock bge-m3 similarity >= 0.400 (p5 of true positive pairs)
+06_false_negative,queries,310,20602,fewer than 1 negatives remaining
+07_cap,"(query, negative) pairs",3974,115575,capped at 8 negatives per query (seeded uniform sample; full list retained)

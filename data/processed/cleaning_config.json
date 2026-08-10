@@ -1,0 +1,35 @@
+{
+  "config": {
+    "seed": 590,
+    "degenerate_min_tokens": 6,
+    "reuse_min_for_fn_check": 20,
+    "fn_threshold_percentile": 5.0,
+    "embedding_model": "BAAI/bge-m3",
+    "embedding_batch_size": 64,
+    "max_negatives_per_query": 8,
+    "min_negatives_per_query": 1,
+    "anaphoric_validation_sample": 150,
+    "split_fractions": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    }
+  },
+  "derived": {
+    "entity_source": "scispacy:en_core_sci_sm",
+    "false_negative_threshold": 0.3999395966529846,
+    "anaphoric_validation": null,
+    "shared_distractor_pool_size": 5211,
+    "n_components": 20086
+  },
+  "final_counts": {
+    "queries": 20602,
+    "passages": 27571,
+    "pairs": 115575,
+    "splits": {
+      "train": 16482,
+      "test": 2060,
+      "val": 2060
+    }
+  }
+}

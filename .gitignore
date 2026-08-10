@@ -5,3 +5,5 @@ __pycache__/
 data/*.parquet
 data/*.csv
 .ipynb_checkpoints/
+.venv311/
+data/cache/
