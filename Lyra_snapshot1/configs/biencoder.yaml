@@ -1,0 +1,30 @@
+# Local override for running on Apple Silicon (MPS) instead of the spec's
+# CUDA A6000 (48 GB). The defaults in models/biencoder.py::BiEncoderConfig
+# stay as the spec's own values for anyone running on real GPU hardware;
+# this file only overrides what MPS/laptop memory actually requires.
+#
+# - bf16 disabled: HF Trainer's bf16 path is CUDA-oriented and unreliable
+#   on MPS as of this run.
+# - effective_batch_size/mini_batch_size cut down: the spec's 256/32 assumes
+#   48 GB of VRAM; a laptop's unified memory budget is much smaller.
+# - gradient_checkpointing off: MPS support for it is inconsistent across
+#   sentence-transformers/transformers versions; batch size is already cut
+#   down enough that it is not needed here.
+model:
+  bf16: false
+  gradient_checkpointing: false
+  effective_batch_size: 32
+  mini_batch_size: 8
+  eval_batch_size: 32
+  n_hard_negatives: 4
+  learning_rate: 2.0e-5
+  epochs: 1
+
+# A smaller sweep than the spec's full 2x3x2 grid, sized for a single-machine
+# laptop run rather than a dedicated GPU box. epochs=3 and n_hard_negatives=8
+# points are dropped from this pass; the full grid can be re-enabled by
+# removing this section (falls back to SweepGrid's own defaults).
+sweep:
+  learning_rate: [1e-5, 2e-5]
+  epochs: [1, 2]
+  n_hard_negatives: [4]

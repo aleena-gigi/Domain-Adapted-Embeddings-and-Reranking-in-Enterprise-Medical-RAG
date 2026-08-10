@@ -7,3 +7,7 @@ data/*.csv
 .ipynb_checkpoints/
 .venv311/
 data/cache/
+data/processed_smoke/
+Lyra_snapshot1/artifacts/
+Lyra_snapshot1/.venv/
+Lyra_snapshot1/**/__pycache__/
